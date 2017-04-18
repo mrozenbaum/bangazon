@@ -30,7 +30,34 @@ class Department(object):
         return self.employee_count
 
     def get_employees(self):
-        return self.employees               
+        return self.employees
+
+
+class Employee():
+    ''' Employee Class '''
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+
+    def __str__(self):
+        return '{}, {}'.format(self.first_name, self.last_name)
+
+    def eat(self, food = None, companions = None):
+        restaurant_list = ['McDonalds', 'Chipotle', 'Subway', 'Baskin Robins', 'Burger King', 'Wendys', 'Taco Bell', 'Panda Express', 'Sbarro', 'Wich Wich', 'Sonic', 'Starbucks']
+        restaurant_choice = random.choice(restaurant_list)
+
+        if companions is None and food is not None:
+            print('{} ate  {} at work today.'.format(self.first_name, food))
+        elif companions is None and food is None:
+            print('{} ate alone at {}.'.format(self.first_name, restaurant_choice))
+            return restaurant_choice
+
+        elif companions is not None and food is None:
+            print('{} ate at {} with {}.'.format(self.first_name, restaurant_choice,(','.join(companions))))
+
+        elif companions is not None and food is not None:
+            print('{} ate {} at {} with {}.'.format(self.first_name, food, restaurant_choice, (','.join(companions))))                    
+
 
 
 class HumanResources(Department):
@@ -122,7 +149,7 @@ if __name__ == '__main__':
    hr_department = HumanResources('Human Resources', 'Kat Von D', 'California', 5)
    marketing_department = Marketing('Marketing', 'Beyonce', 'Texas', 10)
    it_department = IT('Information Technology', 'George Cloony', 'California', 15)
-
+   # Prints the name of each of department instances (exercise 1)
    print(hr_department.name)
    print(marketing_department.name)
    print(it_department.name)
@@ -130,7 +157,19 @@ if __name__ == '__main__':
    hr_department.add_policy('Abuse Free Zone', 'Employees can not display or engage in any verbal, physical, emotional, or any other kid of  abuse or violence.')
    print(hr_department.policy_name)
    print(hr_department.policy_text)
-
+   # #Prints adjusted budget for each department (exercise 2)
    print('hr_department budget=', hr_department.budget)
    print('marketing_department budget =', marketing_department.budget)
    print('it_department budget =', it_department.budget)
+
+   #Prints statements from method overloadng (exercise 3)
+   miriam = Employee("Miriam", "Rozenbaum")
+   print(miriam)
+   print(miriam.eat())
+   miriam.eat(food="buritto")
+   miriam.eat(companions =["Ruthie", "Dara", "Casey"])
+   miriam.eat(food="taco", companions= ["Casey", "Ruthie", "Dara"])
+
+
+
+
